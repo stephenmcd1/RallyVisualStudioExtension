@@ -1,0 +1,2 @@
+Note: You may run into issues where the Section is not rendered and instead you get cryptic errors about MEF, Composition, Reflection, Casting, etc.  In that case, you may just need
+to delete this folder: %localappdata%\Microsoft\VisualStudio\14.0Exp\ComponentModelCache (assuming you are using VS2015 Experimental instance - adjust 14.0Exp if needed)
