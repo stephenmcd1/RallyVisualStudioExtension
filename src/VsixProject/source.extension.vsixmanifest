@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="RallyExtension.Stephen McDaniel.cc44780a-b5ae-4e80-bb84-03cdcb49e459" Version="1.5.1" Language="en-US" Publisher="Stephen McDaniel" />
+    <Identity Id="RallyExtension.Stephen McDaniel.cc44780a-b5ae-4e80-bb84-03cdcb49e459" Version="1.5.2" Language="en-US" Publisher="Stephen McDaniel" />
     <DisplayName>Rally Extension</DisplayName>
     <Description xml:space="preserve">Integrates Rally with Visual Studio including automatic creation of Discussions on Tasks when code is checked-in and the ability to perform basic editing of Tasks - all within the Pending Changes tab of Team ExplorerIntegrates Rally</Description>
     <License>License.txt</License>

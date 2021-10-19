@@ -155,7 +155,20 @@ namespace RallyExtension.Extension.Utilities
         public bool AddDiscussionToTask(RallyTaskViewModel task, string discussionBody)
         {
             var discussion = new Dictionary<string, object> {{"Text", discussionBody}};
-            var res = _apiClient.AddToCollection(task.Ref, "Discussion", new[] {new DynamicJsonObject(discussion)}.ToList(), null);
+
+            //Make the first attempt at the update
+            Func<OperationResult> tryUpdate = () => _apiClient.AddToCollection(task.Ref, "Discussion", new[] {new DynamicJsonObject(discussion)}.ToList(), null);
+            var res = tryUpdate();
+
+            //If it failed, it may be because our session expired.  We could try to look for a message like 'Not authorized to perform action: Invalid key' but that could be fragile
+            //   and errors should be rare (?) so we'll just take the safe approach and assume it may have been an expired session.
+            if (!res.Success)
+            {
+                //Log back on with the last credentials and try the update one more time
+                TryLogOn(_lastUserName, _lastPassword);
+                res = tryUpdate();
+            }
+
             if (!res.Success)
             {
                 _onError("Error creating Rally Discussion: " + string.Join(",", res.Errors));
