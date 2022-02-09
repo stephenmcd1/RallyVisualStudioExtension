@@ -280,7 +280,26 @@
                     </Grid>
                 </Border>
 
-                <TextBlock Margin="0 5 0 0" Text="Recent Tasks" FontWeight="Bold" />
+                <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                    <TextBlock Text="Recent Tasks" FontWeight="Bold" />
+                    <TextBlock Text=" (" />
+                    <teamExplorer:TextLink Text="Toggle Filter" Command="{Binding ToggleFilterCommand}" />
+                    <TextBlock Text=")" />
+                </StackPanel>
+
+                <Border Padding="5" Background="{StaticResource EmbeddedDialogBackgroundBrushKey}" Visibility="{Binding Path=IsFilterActive, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <DockPanel>
+                        <CheckBox DockPanel.Dock="Left" Margin="0 0 15 0" IsChecked="{Binding ExcludeCompleteTasks}" VerticalAlignment="Center"
+                                  Content="Exclude Completed" />
+                        <mtcw:LabeledTextBox AcceptsReturn="False"
+                                             HintText="Filter by Task Name" Text="{Binding NameFilter, Mode=TwoWay}">
+                            <mtcw:LabeledTextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding RefreshCommand}"/>
+                            </mtcw:LabeledTextBox.InputBindings>
+                        </mtcw:LabeledTextBox>
+                    </DockPanel>
+                </Border>
+
                 <ListView ItemsSource="{Binding Path=CurrentList.Items}" BorderThickness="0"
                           SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           mvvm:ItemsControlBehaviour.ItemDoubleClickCommand="{Binding SelectItemCommand}">
@@ -296,7 +315,7 @@
                                 <GridViewColumnHeader Content="Formatted ID" />
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <!-- The grid adds a 6px margine that we want to 'undo' on this first column. See: https://social.msdn.microsoft.com/Forums/vstudio/en-US/d76d13f4-7f55-48d5-a176-11b3fe9610b8/how-to-eliminate-the-space-between-gridviewcolumn-cells-in-listview-control?forum=wpf -->
+                                        <!-- The grid adds a 6px margin that we want to 'undo' on this first column. See: https://social.msdn.microsoft.com/Forums/vstudio/en-US/d76d13f4-7f55-48d5-a176-11b3fe9610b8/how-to-eliminate-the-space-between-gridviewcolumn-cells-in-listview-control?forum=wpf -->
                                         <teamExplorer:TextLink Margin="-6 0 0 0" Text="{Binding FormattedId}"
                                                                Command="{Binding OpenItemCommand}" />
                                     </DataTemplate>

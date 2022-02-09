@@ -30,6 +30,7 @@ namespace RallyExtension.Extension.ViewModels
         private int _currentPage = 1;
         private int? _totalPages;
         private string _pageInfo = "Loading...";
+        private Query _adHocQuery;
 
         public int CurrentPage
         {
@@ -110,8 +111,9 @@ namespace RallyExtension.Extension.ViewModels
             }
         }
 
-        public async Task<List<RallyTaskViewModel>> Refresh()
+        public async Task<List<RallyTaskViewModel>> Refresh(Query adHocQuery)
         {
+            _adHocQuery = adHocQuery;
             _cachedPages.Clear();
             return await LoadPage(1);
         }
@@ -121,7 +123,8 @@ namespace RallyExtension.Extension.ViewModels
             List<RallyTaskViewModel> items;
             if (!_cachedPages.TryGetValue(pageNumber, out items))
             {
-                var result = await _rallyApi.GetTasks(_query, _pageSize, "LastUpdateDate desc", (pageNumber - 1) * _pageSize + 1);
+                var finalQuery = _adHocQuery == null ? _query : _query.And(_adHocQuery);
+                var result = await _rallyApi.GetTasks(finalQuery, _pageSize, "LastUpdateDate desc", (pageNumber - 1) * _pageSize + 1);
 
                 _totalItems = result.TotalResultCount;
                 TotalPages = _totalItems / _pageSize;

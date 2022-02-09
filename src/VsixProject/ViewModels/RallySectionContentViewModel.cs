@@ -108,6 +108,10 @@ namespace RallyExtension.Extension.ViewModels
                 }
             });
 
+            ToggleFilterCommand = new RelayCommand(() => IsFilterActive = !IsFilterActive);
+
+            RefreshCommand = new RelayCommand(() => HandleAsyncErrors(Refresh, "Error when executing refresh command"));
+
             //Setup some initial variables - especially to trigger the property change logic to get everything in a good state
             Initializing = true;
             IsLoggedOn = false;
@@ -154,6 +158,28 @@ namespace RallyExtension.Extension.ViewModels
             return true;
         }
 
+        private Query BuildAdHocFilter()
+        {
+            if (!IsFilterActive)
+            {
+                return null;
+            }
+
+            Query filter = null;
+            if (ExcludeCompleteTasks)
+            {
+                filter = new Query("State", Query.Operator.DoesNotEqual, "Completed");
+            }
+
+            if (!string.IsNullOrWhiteSpace(NameFilter))
+            {
+                var nameFilter = new Query("Name", Query.Operator.Contains, NameFilter);
+                filter = filter == null ? nameFilter : filter.And(nameFilter);
+            }
+
+            return filter;
+        }
+
         public async Task Refresh()
         {
             _parentSection.IsBusy = true;
@@ -164,7 +190,7 @@ namespace RallyExtension.Extension.ViewModels
                 return;
             }
 
-            var items = await CurrentList.Refresh();
+            var items = await CurrentList.Refresh(BuildAdHocFilter());
 
             var updatedCurrent = items.SingleOrDefault(item => item.FormattedId == CurrentItem?.FormattedId);
             if (CurrentItem != null && updatedCurrent == null)
@@ -231,6 +257,9 @@ namespace RallyExtension.Extension.ViewModels
         private bool _initializing;
         private string _userNameEntry;
         private bool _isSearchingById;
+        private bool _isFilterActive;
+        private bool _excludeCompleteTasks;
+        private string _nameFilter;
         private RallyTaskViewModel _currentItem;
         private bool _isErrorActive;
         private string _errorMessage;
@@ -243,6 +272,9 @@ namespace RallyExtension.Extension.ViewModels
         public RelayCommand DismissErrorsCommand { get; set; }
         public RelayCommand ClearCurrentItemCommand { get; set; }
         public RelayCommand SelectItemCommand { get; set; }
+        public RelayCommand ToggleFilterCommand { get; set; }
+
+        public RelayCommand RefreshCommand { get; set; }
 
         public PagedTaskListViewModel CurrentList
         {
@@ -313,6 +345,41 @@ namespace RallyExtension.Extension.ViewModels
             {
                 if (value == _isSearchingById) return;
                 _isSearchingById = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsFilterActive
+        {
+            get { return _isFilterActive; }
+            set
+            {
+                if (value == _isFilterActive) return;
+                _isFilterActive = value;
+                OnPropertyChanged();
+                HandleAsyncErrors(Refresh, "Error refreshing as part of filter change");
+            }
+        }
+
+        public bool ExcludeCompleteTasks
+        {
+            get { return _excludeCompleteTasks; }
+            set
+            {
+                if (value == _excludeCompleteTasks) return;
+                _excludeCompleteTasks = value;
+                OnPropertyChanged();
+                HandleAsyncErrors(Refresh, "Error refreshing as part of filter change");
+            }
+        }
+
+        public string NameFilter
+        {
+            get { return _nameFilter; }
+            set
+            {
+                if (value == _nameFilter) return;
+                _nameFilter = value;
                 OnPropertyChanged();
             }
         }
@@ -423,7 +490,7 @@ namespace RallyExtension.Extension.ViewModels
 
             try
             {
-                await CurrentList.Refresh();
+                await CurrentList.Refresh(BuildAdHocFilter());
             }
             catch (Exception e)
             {
