@@ -6,30 +6,67 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyVisualStudioExtension.Extension", "VsixProject\RallyVisualStudioExtension.Extension.csproj", "{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{07998020-AB03-44BC-916D-16118590924A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyVisualStudioExtension.VS2022", "RallyVisualStudioExtension.VS2022\RallyVisualStudioExtension.VS2022.csproj", "{6A3DF801-6AEC-498A-8491-1F6990F487A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VS2015", "VS2015", "{181CB4E5-E5AF-4D91-BAE6-43ED2202DE59}"
 	ProjectSection(SolutionItems) = preProject
-		Dependencies\Microsoft.TeamFoundation.Client.dll = Dependencies\Microsoft.TeamFoundation.Client.dll
-		Dependencies\Microsoft.TeamFoundation.Controls.dll = Dependencies\Microsoft.TeamFoundation.Controls.dll
-		Dependencies\Microsoft.TeamFoundation.VersionControl.Client.dll = Dependencies\Microsoft.TeamFoundation.VersionControl.Client.dll
-		Dependencies\Microsoft.TeamFoundation.VersionControl.Controls.dll = Dependencies\Microsoft.TeamFoundation.VersionControl.Controls.dll
-		Dependencies\Microsoft.TeamFoundation.WorkItemTracking.Client.dll = Dependencies\Microsoft.TeamFoundation.WorkItemTracking.Client.dll
-		Dependencies\Microsoft.TeamFoundation.WorkItemTracking.Controls.dll = Dependencies\Microsoft.TeamFoundation.WorkItemTracking.Controls.dll
-		Dependencies\Microsoft.VisualStudio.TeamFoundation.dll = Dependencies\Microsoft.VisualStudio.TeamFoundation.dll
-		Dependencies\Microsoft.VisualStudio.TeamFoundation.VersionControl.dll = Dependencies\Microsoft.VisualStudio.TeamFoundation.VersionControl.dll
-		Dependencies\Microsoft.VisualStudio.TeamFoundation.WorkItemTracking.dll = Dependencies\Microsoft.VisualStudio.TeamFoundation.WorkItemTracking.dll
+		Dependencies\VS2015\Microsoft.TeamFoundation.Client.dll = Dependencies\VS2015\Microsoft.TeamFoundation.Client.dll
+		Dependencies\VS2015\Microsoft.TeamFoundation.Common.dll = Dependencies\VS2015\Microsoft.TeamFoundation.Common.dll
+		Dependencies\VS2015\Microsoft.TeamFoundation.Controls.dll = Dependencies\VS2015\Microsoft.TeamFoundation.Controls.dll
+		Dependencies\VS2015\Microsoft.TeamFoundation.VersionControl.Client.dll = Dependencies\VS2015\Microsoft.TeamFoundation.VersionControl.Client.dll
+		Dependencies\VS2015\Microsoft.TeamFoundation.VersionControl.Controls.dll = Dependencies\VS2015\Microsoft.TeamFoundation.VersionControl.Controls.dll
+		Dependencies\VS2015\Microsoft.TeamFoundation.WorkItemTracking.Client.dll = Dependencies\VS2015\Microsoft.TeamFoundation.WorkItemTracking.Client.dll
+		Dependencies\VS2015\Microsoft.TeamFoundation.WorkItemTracking.Controls.dll = Dependencies\VS2015\Microsoft.TeamFoundation.WorkItemTracking.Controls.dll
+		Dependencies\VS2015\Microsoft.VisualStudio.TeamFoundation.dll = Dependencies\VS2015\Microsoft.VisualStudio.TeamFoundation.dll
+		Dependencies\VS2015\Microsoft.VisualStudio.TeamFoundation.VersionControl.dll = Dependencies\VS2015\Microsoft.VisualStudio.TeamFoundation.VersionControl.dll
+		Dependencies\VS2015\Microsoft.VisualStudio.TeamFoundation.WorkItemTracking.dll = Dependencies\VS2015\Microsoft.VisualStudio.TeamFoundation.WorkItemTracking.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VS2022", "VS2022", "{C9E522D1-82B1-4D2C-A6BB-124DFB0D382D}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\VS2022\Microsoft.TeamFoundation.Client.dll = Dependencies\VS2022\Microsoft.TeamFoundation.Client.dll
+		Dependencies\VS2022\Microsoft.TeamFoundation.Controls.dll = Dependencies\VS2022\Microsoft.TeamFoundation.Controls.dll
+		Dependencies\VS2022\Microsoft.TeamFoundation.VersionControl.Client.dll = Dependencies\VS2022\Microsoft.TeamFoundation.VersionControl.Client.dll
+		Dependencies\VS2022\Microsoft.TeamFoundation.VersionControl.Controls.dll = Dependencies\VS2022\Microsoft.TeamFoundation.VersionControl.Controls.dll
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Debug|x86.Build.0 = Debug|Any CPU
 		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A7F8651-766E-44E9-8A5C-6528E0C61EDA}.Release|x86.Build.0 = Release|Any CPU
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Debug|x86.ActiveCfg = Debug|x86
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Debug|x86.Build.0 = Debug|x86
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Release|x86.ActiveCfg = Release|x86
+		{6A3DF801-6AEC-498A-8491-1F6990F487A3}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{181CB4E5-E5AF-4D91-BAE6-43ED2202DE59} = {07998020-AB03-44BC-916D-16118590924A}
+		{C9E522D1-82B1-4D2C-A6BB-124DFB0D382D} = {07998020-AB03-44BC-916D-16118590924A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7635D748-48A9-4307-813E-087DB34C56C5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7635D748-48A9-4307-813E-087DB34C56C5}
 	EndGlobalSection
 EndGlobal

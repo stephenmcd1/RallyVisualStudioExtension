@@ -153,6 +153,10 @@ namespace RallyExtension.Extension.ViewModels
 
             var user = await Task.Run(() => _rallyApi.GetCurrentUser());
             CurrentUserDisplayName = user.DisplayName;
+
+            var query = new Query("Owner.DisplayName", Query.Operator.Equals, CurrentUserDisplayName);
+            CurrentList = new PagedTaskListViewModel(5, query, _rallyApi, ShowError);
+
             IsLoggedOn = true;
 
             return true;
@@ -221,9 +225,6 @@ namespace RallyExtension.Extension.ViewModels
             {
                 ShowError("Could not connect to Rally with saved credentials");
             }
-
-            var query = new Query("Owner.DisplayName", Query.Operator.Equals, CurrentUserDisplayName);
-            CurrentList = new PagedTaskListViewModel(5, query, _rallyApi, ShowError);
 
             await Refresh();
 

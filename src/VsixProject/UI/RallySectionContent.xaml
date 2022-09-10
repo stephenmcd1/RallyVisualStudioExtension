@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:teamExplorer="clr-namespace:Microsoft.TeamFoundation.Controls.WPF.TeamExplorer;assembly=Microsoft.TeamFoundation.Controls"
-             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.11.0"
              xmlns:mtcw="clr-namespace:Microsoft.TeamFoundation.Controls.WPF;assembly=Microsoft.TeamFoundation.Controls"
              xmlns:pendingChanges="clr-namespace:Microsoft.TeamFoundation.VersionControl.Controls.PendingChanges;assembly=Microsoft.TeamFoundation.VersionControl.Controls"
+             xmlns:utils="clr-namespace:RallyExtension.Extension.Utilities"
              xmlns:viewModels="clr-namespace:RallyExtension.Extension.ViewModels"
              xmlns:mvvm="clr-namespace:Microsoft.TeamFoundation.MVVM;assembly=Microsoft.TeamFoundation.Controls"
              xmlns:converters="clr-namespace:Microsoft.TeamFoundation.Controls.WPF.Converters;assembly=Microsoft.TeamFoundation.Controls"
@@ -201,7 +201,7 @@
                 </StackPanel>
 
                 <Border Padding="6" BorderThickness="1"
-                        BorderBrush="{DynamicResource {x:Static vsshell:VsBrushes.CommandBarSelectedBorderKey}}"
+                        BorderBrush="{DynamicResource {x:Static utils:Brushes.CommandBarSelectedBorderKey}}"
                         Background="{StaticResource EmbeddedDialogBackgroundBrushKey}">
                     <Grid>
                         <TextBlock Text="Nothing selected" Foreground="{StaticResource SubduedTextBrushKey}"
@@ -239,12 +239,13 @@
                                         <Setter Property="Padding" Value="3 2" />
                                         <Style.Triggers>
                                             <Trigger Property="IsEnabled" Value="False">
-                                                <Setter Property="BorderBrush"
-                                                        Value="{DynamicResource {x:Static vsshell:VsBrushes.ToolWindowButtonDownBorderKey}}" />
-                                                <Setter Property="Background"
-                                                        Value="{DynamicResource {x:Static vsshell:VsBrushes.ToolWindowButtonDownKey}}" />
-                                                <Setter Property="Foreground"
-                                                        Value="{DynamicResource {x:Static vsshell:VsBrushes.ToolWindowButtonDownActiveGlyphKey}}" />
+                                                <Setter Property="BorderBrush" 
+                                                        Value="{StaticResource ButtonPressedBorderBrushKey}" />
+                                                <Setter Property="Background" 
+                                                        Value="{StaticResource ButtonPressedBackgroundBrushKey}" />
+                                                <Setter Property="Foreground" 
+                                                        Value="{StaticResource ButtonPressedForegroundBrushKey}" />
+                                                
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
@@ -366,9 +367,9 @@
                                                     <Condition Binding="{Binding Selected}" Value="True" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Background"
-                                                        Value="{DynamicResource {x:Static vsshell:VsBrushes.CommandBarSelectedKey}}" />
+                                                        Value="{DynamicResource {x:Static utils:Brushes.CommandBarSelectedKey}}" />
                                                 <Setter TargetName="ListItemBorder" Property="BorderBrush"
-                                                        Value="{DynamicResource {x:Static vsshell:VsBrushes.CommandBarSelectedBorderKey}}" />
+                                                        Value="{DynamicResource {x:Static utils:Brushes.CommandBarSelectedBorderKey}}" />
                                             </MultiDataTrigger>
 
                                             <MultiDataTrigger>
@@ -378,7 +379,7 @@
                                                         Value="True" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Background"
-                                                        Value="{DynamicResource {x:Static vsshell:VsBrushes.CommandBarHoverKey}}" />
+                                                        Value="{DynamicResource {x:Static utils:Brushes.CommandBarHoverKey}}" />
                                             </MultiDataTrigger>
 
 
@@ -390,7 +391,7 @@
                                                         Value="True" />
                                                 </MultiDataTrigger.Conditions>
                                                 <Setter Property="Background"
-                                                        Value="{DynamicResource {x:Static vsshell:VsBrushes.CommandBarHoverOverSelectedKey}}" />
+                                                        Value="{DynamicResource {x:Static utils:Brushes.CommandBarHoverOverSelectedKey}}" />
                                             </MultiDataTrigger>
 
 
@@ -399,7 +400,7 @@
                                 </Setter.Value>
                             </Setter>
                             <Setter Property="Foreground"
-                                    Value="{DynamicResource {x:Static vsshell:VsBrushes.ToolWindowTextKey}}" />
+                                    Value="{DynamicResource {x:Static utils:Brushes.ToolWindowTextKey}}" />
                             <Setter Property="ToolTip" Value="{StaticResource RallyItemTooltip}" />
                         </Style>
                     </ListView.ItemContainerStyle>
